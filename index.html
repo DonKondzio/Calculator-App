@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator app</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="dist/img/favicon-32x32.png"image/x-icon">
+    <link rel="stylesheet" href="dist/css/style.min.css" />
+    <script src="dist/js/app.min.js" defer></script>
+  </head>
+  <body>
+    <div class="calc">
+      <div class="calc__upper">
+        <p class="calc__upper-logo">calc</p>
+        <div class="calc__upper-right">
+          <p class="calc__upper-right-text">THEME</p>
+          <div class="calc__upper-right-toggle">
+            <p class="calc__upper-right-toggle-text">
+              <span>1</span><span>2</span><span>3</span>
+            </p>
+            <button class="calc__upper-right-toggle-btn"></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc__screen">
+        <p class="calc__screen-display">0</p>
+      </div>
+
+      <div class="calc__keypad-container">
+        <div class="calc__keypad">
+          <button data-number class="calc__key">7</button>
+          <button data-number class="calc__key">8</button>
+          <button data-number class="calc__key">9</button>
+          <button data-delete class="calc__key calc__key--delete">DEL</button>
+          <button data-number class="calc__key">4</button>
+          <button data-number class="calc__key">5</button>
+          <button data-number class="calc__key">6</button>
+          <button data-operand class="calc__key">+</button>
+          <button data-number class="calc__key">1</button>
+          <button data-number class="calc__key">2</button>
+          <button data-number class="calc__key">3</button>
+          <button data-operand class="calc__key">-</button>
+          <button data-number class="calc__key">.</button>
+          <button data-number class="calc__key">0</button>
+          <button data-operand class="calc__key">/</button>
+          <button data-operand class="calc__key">x</button>
+          <button data-reset class="calc__key calc__key--reset">RESET</button>
+          <button data-equals class="calc__key calc__key--equals">=</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

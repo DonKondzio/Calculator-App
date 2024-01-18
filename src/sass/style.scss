@@ -1,0 +1,245 @@
+$white: hsl(0, 0%, 100%);
+
+:root {
+  --mainBackground: hsl(222, 26%, 31%);
+  --keypadToggleBackground: hsl(223, 31%, 20%);
+  --screenBackground: hsl(224, 36%, 15%);
+  --primaryKeyBackground: hsl(225, 21%, 49%);
+  --primaryKeyShadow: hsl(224, 28%, 35%);
+  --secondaryKeyBackground: hsl(6, 63%, 50%);
+  --secondaryKeyShadow: hsl(6, 70%, 34%);
+  --tertiaryKeyBackground: hsl(30, 25%, 89%);
+  --tertiaryKeyShadow: hsl(28, 16%, 65%);
+  --mainText: hsl(221, 14%, 31%);
+  --upperText: $white;
+  --equalText: $white;
+}
+
+[data-theme="theme-1"] {
+  --mainBackground: hsl(222, 26%, 31%);
+  --keypadToggleBackground: hsl(223, 31%, 20%);
+  --screenBackground: hsl(224, 36%, 15%);
+  --primaryKeyBackground: hsl(225, 21%, 49%);
+  --primaryKeyShadow: hsl(224, 28%, 35%);
+  --secondaryKeyBackground: hsl(6, 63%, 50%);
+  --secondaryKeyShadow: hsl(6, 70%, 34%);
+  --tertiaryKeyBackground: hsl(30, 25%, 89%);
+  --tertiaryKeyShadow: hsl(28, 16%, 65%);
+  --mainText: hsl(221, 14%, 31%);
+  --upperText: $white;
+  --equalText: $white;
+}
+
+[data-theme="theme-2"] {
+  --mainBackground: hsl(0, 0%, 90%);
+  --keypadToggleBackground: hsl(0, 5%, 81%);
+  --screenBackground: hsl(0, 0%, 93%);
+  --primaryKeyBackground: hsl(185, 42%, 37%);
+  --primaryKeyShadow: hsl(185, 58%, 25%);
+  --secondaryKeyBackground: hsl(25, 98%, 40%);
+  --secondaryKeyShadow: hsl(25, 99%, 27%);
+  --tertiaryKeyBackground: hsl(45, 7%, 89%);
+  --tertiaryKeyShadow: hsl(35, 11%, 61%);
+  --mainText: hsl(60, 10%, 19%);
+  --upperText: var(--mainText);
+  --equalText: $white;
+}
+
+[data-theme="theme-3"] {
+  --mainBackground: hsl(268, 75%, 9%);
+  --keypadToggleBackground: hsl(268, 71%, 12%);
+  --screenBackground: hsl(268, 71%, 12%);
+  --primaryKeyBackground: hsl(281, 89%, 26%);
+  --primaryKeyShadow: hsl(285, 91%, 52%);
+  --secondaryKeyBackground: hsl(176, 100%, 44%);
+  --secondaryKeyShadow: hsl(177, 92%, 70%);
+  --tertiaryKeyBackground: hsl(268, 47%, 21%);
+  --tertiaryKeyShadow: hsl(290, 70%, 36%);
+  --mainText: hsl(52, 100%, 62%);
+  --upperText: var(--mainText);
+  --equalText: hsl(198, 20%, 13%);
+}
+
+html {
+  font-size: 62.5%;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--mainBackground);
+  font-size: 1.6rem;
+  font-family: "League Spartan", sans-serif;
+  color: var(--upperText);
+  transition: background-color 0.15s;
+}
+
+.calc {
+  margin: 2rem;
+  max-width: 35rem;
+  width: 100%;
+  &__upper {
+    margin-bottom: 3rem;
+    display: flex;
+    justify-content: space-between;
+    &-logo {
+      font-size: 2.4rem;
+      align-self: center;
+      color: var(--upperText);
+    }
+
+    &-right {
+      display: flex;
+      gap: 3rem;
+      &-text {
+        margin-bottom: 0.7rem;
+        font-size: 1.2rem;
+        align-self: flex-end;
+        letter-spacing: 1px;
+      }
+
+      &-toggle {
+        &-text {
+          margin: 0.5rem auto;
+          width: 70%;
+          display: flex;
+          justify-content: space-between;
+          font-size: 1.2rem;
+        }
+        &-btn {
+          position: relative;
+          padding: 1.4rem 3.6rem;
+          border: none;
+          border-radius: 1.5rem;
+          background-color: var(--keypadToggleBackground);
+          cursor: pointer;
+          &::before {
+            position: absolute;
+            top: 23%;
+            left: 8%;
+            width: 1.6rem;
+            height: 1.6rem;
+            border-radius: 50%;
+            background-color: var(--secondaryKeyBackground);
+            content: "";
+            transition: left 0.3s;
+          }
+          &.second-state::before {
+            left: 50%;
+            translate: (-50%);
+          }
+
+          &.third-state::before {
+            left: 69%;
+          }
+        }
+      }
+    }
+  }
+
+  &__screen {
+    position: relative;
+    padding: 3rem 2.5rem;
+    background-color: var(--screenBackground);
+    border-radius: 0.8rem;
+    text-align: right;
+    font-size: 4.2rem;
+    margin-bottom: 2.5rem;
+    overflow: auto;
+  }
+
+  &__keypad-container {
+    width: 100%;
+    padding: 2.5rem;
+    border-radius: 0.8rem;
+    background-color: var(--keypadToggleBackground);
+    .calc__keypad {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.8rem 1.4rem;
+      grid-auto-rows: 1fr;
+      .calc__key {
+        padding: 1.8rem 0 1.2rem;
+        background-color: var(--tertiaryKeyBackground);
+        border: none;
+        font-family: inherit;
+        font-size: 3.2rem;
+        color: var(--mainText);
+        border-radius: 6px;
+        box-shadow: 0 4px 0 var(--tertiaryKeyShadow);
+        cursor: pointer;
+        transition: filter 0.2s;
+        &:hover {
+          filter: brightness(1.6);
+        }
+        &--reset {
+          grid-column: 1/3;
+        }
+        &--equals {
+          grid-column: 3/-1;
+          background-color: var(--secondaryKeyBackground);
+          box-shadow: 0 4px 0 var(--secondaryKeyShadow);
+          color: var(--equalText);
+          font-size: 2rem;
+        }
+
+        &--delete,
+        &--reset {
+          background-color: var(--primaryKeyBackground);
+          color: $white;
+          font-size: 2rem;
+          box-shadow: 0 4px 0 var(--primaryKeyShadow);
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .calc {
+    max-width: 50rem;
+    &__upper {
+      &-logo {
+        margin-bottom: 0.7rem;
+        align-self: flex-end;
+        font-size: 3.2rem;
+      }
+      &-right {
+        &-text {
+          font-size: 1.4rem;
+        }
+      }
+    }
+
+    &__screen {
+      padding: 3.6rem 2.5rem;
+      font-size: 5.2rem;
+    }
+
+    &__keypad-container {
+      .calc__keypad {
+        gap: 2.6rem 2.2rem;
+        .calc__key {
+          padding: 1.8rem 1rem 1.2rem;
+          font-size: 3.6rem;
+          border-radius: 1rem;
+          &--delete,
+          &--reset {
+            font-size: 2.8rem;
+          }
+          &--equals {
+            font-size: 3rem;
+          }
+        }
+      }
+    }
+  }
+}
