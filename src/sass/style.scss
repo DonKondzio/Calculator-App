@@ -1,5 +1,3 @@
-$white: hsl(0, 0%, 100%);
-
 :root {
   --mainBackground: hsl(222, 26%, 31%);
   --keypadToggleBackground: hsl(223, 31%, 20%);
@@ -11,8 +9,8 @@ $white: hsl(0, 0%, 100%);
   --tertiaryKeyBackground: hsl(30, 25%, 89%);
   --tertiaryKeyShadow: hsl(28, 16%, 65%);
   --mainText: hsl(221, 14%, 31%);
-  --upperText: $white;
-  --equalText: $white;
+  --upperText: hsl(0, 0%, 100%);
+  --equalText: hsl(0, 0%, 100%);
 }
 
 [data-theme="theme-1"] {
@@ -26,8 +24,8 @@ $white: hsl(0, 0%, 100%);
   --tertiaryKeyBackground: hsl(30, 25%, 89%);
   --tertiaryKeyShadow: hsl(28, 16%, 65%);
   --mainText: hsl(221, 14%, 31%);
-  --upperText: $white;
-  --equalText: $white;
+  --upperText: hsl(0, 0%, 100%);
+  --equalText: hsl(0, 0%, 100%);
 }
 
 [data-theme="theme-2"] {
@@ -42,7 +40,7 @@ $white: hsl(0, 0%, 100%);
   --tertiaryKeyShadow: hsl(35, 11%, 61%);
   --mainText: hsl(60, 10%, 19%);
   --upperText: var(--mainText);
-  --equalText: $white;
+  --equalText: hsl(0, 0%, 100%);
 }
 
 [data-theme="theme-3"] {
@@ -194,7 +192,7 @@ body {
         &--delete,
         &--reset {
           background-color: var(--primaryKeyBackground);
-          color: $white;
+          color: #fff;
           font-size: 2rem;
           box-shadow: 0 4px 0 var(--primaryKeyShadow);
         }

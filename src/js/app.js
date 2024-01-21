@@ -12,15 +12,37 @@ const equalsKey = document.querySelector("[data-equals]");
 const resetKey = document.querySelector("[data-reset]");
 const deleteKey = document.querySelector("[data-delete]");
 
-class Calculator {
+class Toggler {
   toggleState = 1;
+  constructor() {
+    toggleBtn.addEventListener("click", this.toggle.bind(this));
+  }
+
+  toggle() {
+    toggleBtn.classList.remove("second-state", "third-state");
+    this.toggleState++;
+    if (this.toggleState === 2) {
+      toggleBtn.classList.add("second-state");
+    }
+    if (this.toggleState === 3) {
+      toggleBtn.classList.add("third-state");
+    }
+    if (this.toggleState === 4) this.toggleState = 1;
+
+    document.documentElement.setAttribute(
+      "data-theme",
+      `theme-${this.toggleState}`
+    );
+  }
+}
+class Calculator {
   currentNumber = "";
   previousNumber = 0;
   lastOperationNum = 0;
   currentOperand;
   isLastOperationEqual = false;
   constructor() {
-    toggleBtn.addEventListener("click", this.toggle.bind(this));
+    const toggler = new Toggler();
     numberKeys.forEach((key) =>
       key.addEventListener("click", this.addNum.bind(this))
     );
@@ -30,23 +52,6 @@ class Calculator {
     deleteKey.addEventListener("click", this.delete.bind(this));
     equalsKey.addEventListener("click", this.equals.bind(this));
     resetKey.addEventListener("click", this.reset.bind(this));
-  }
-
-  toggle() {
-    toggleBtn.classList.remove("second-state", "third-state");
-    this.toggleState++;
-    if (this.toggleState === 4) this.toggleState = 1;
-    if (this.toggleState === 2) {
-      toggleBtn.classList.add("second-state");
-    }
-    if (this.toggleState === 3) {
-      toggleBtn.classList.add("third-state");
-    }
-
-    document.documentElement.setAttribute(
-      "data-theme",
-      `theme-${this.toggleState}`
-    );
   }
 
   displayNum() {
@@ -59,18 +64,11 @@ class Calculator {
 
   addNum(e) {
     const num = e.target.textContent;
-    if (this.currentNumber.length >= 13) return;
-    if (num === "." && this.currentNumber.includes(".")) return;
-    if (+num === 0 && +this.currentNumber === 0) return;
+    if (this.currentNumber.length >= 13) return; // preventing too long input
+    if (num === "." && this.currentNumber.includes(".")) return; // preventing multiple dots
+    if (+num === 0 && +this.currentNumber === 0) return; // preventing multiple zeros in front
     this.currentNumber += num;
-    // this.currentOperand = null;
     this.displayNum();
-    console.log("addNum");
-    console.log(
-      `Previous: ${this.previousNumber} ${typeof this.previousNumber}`
-    );
-    console.log(`Current: ${this.currentNumber} ${typeof this.currentNumber}`);
-    console.log("");
   }
 
   delete() {
@@ -82,28 +80,17 @@ class Calculator {
     if (this.previousNumber && this.currentNumber) this.equals();
     if (
       this.currentOperand === e.target.textContent &&
-      !this.LastOperationIsEqual
+      !this.isLastOperationEqual
     )
       return;
-    this.LastOperationIsEqual = false;
-    this.currentOperand = e.target.textContent;
     if (!this.currentNumber) {
       return;
     }
-    if (this.previousNumber === 0) {
-      this.previousNumber = this.currentNumber;
-      this.currentNumber = "";
-    } else {
-      // this.equals();
-      this.previousNumber = this.currentNumber;
-      this.currentNumber = "";
-    }
-    console.log("doOperation");
-    console.log(
-      `Previous: ${this.previousNumber} ${typeof this.previousNumber}`
-    );
-    console.log(`Current: ${this.currentNumber} ${typeof this.currentNumber}`);
-    console.log("");
+
+    this.isLastOperationEqual = false;
+    this.currentOperand = e.target.textContent;
+    this.previousNumber = this.currentNumber;
+    this.currentNumber = "";
   }
 
   handleOperations(previousOperationNumber, operationNumber) {
@@ -123,26 +110,21 @@ class Calculator {
   }
 
   equals() {
-    if (!this.LastOperationIsEqual)
-      if (!this.LastOperationIsEqual) {
+    if (!+this.currentNumber) return;
+    if (!this.isLastOperationEqual)
+      if (!this.isLastOperationEqual) {
         this.lastOperationNum = this.currentNumber;
         this.handleOperations(this.previousNumber, this.currentNumber);
       }
     this.previousNumber = 0;
 
-    if (this.LastOperationIsEqual) {
+    if (this.isLastOperationEqual) {
       console.log(this.lastOperationNum);
       this.handleOperations(this.currentNumber, this.lastOperationNum);
     }
 
     this.displayNum();
-    console.log("equals");
-    console.log(
-      `Previous: ${this.previousNumber} ${typeof this.previousNumber}`
-    );
-    console.log(`Current: ${this.currentNumber} ${typeof this.currentNumber}`);
-    this.LastOperationIsEqual = true;
-    console.log("");
+    this.isLastOperationEqual = true;
   }
 
   reset() {
